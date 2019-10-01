@@ -5,10 +5,10 @@ Replace !1 in column $1 with -1 in unix:
 awk '$1!=1 {$1=-1} {print}' file > newfile
 
 //Shuffle 1000 lines in file in unix: 
-//shuf -n 1000 filename > new filename
+shuf -n 1000 filename > new filename
 
-Randomize the order of samples in the csv file before splitting
-python randomizer.py <file.xxx>
+//Randomize the order of samples in the csv file before splitting
+//python randomizer.py <file.xxx>
 
 Convert to CSV: 
 python convert2csv.py < sample size> <#attributes> <dataset> <column index of first whitespace> <class label representing postive>
