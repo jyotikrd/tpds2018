@@ -1,0 +1,53 @@
+#BSUB -n 128 -R 'rusage[mem=2500] span[ptile=16]' 
+## -M 8000
+#BSUB -J MPI_QRSVM -o MPI_QRSVM.%J -L /bin/bash -W 02:00
+#	
+module purge
+module load intel/2017A
+module load numpy/1.10.4-intel-2016a-Python-2.7.11
+module load impi/5.0.3.048-iccifort-2015.3.187
+module load Armadillo/6.400.3-intel-2015B-Python-2.7.10
+#
+mpiicpc -o  MPIexecV1 dist_MPI_QRSVM_MEKA_V0.cpp -O3 -larmadillo -std=c++14
+#
+#./distribute.sh dataX.csv 464810 64 2
+#
+#mpirun -np 2 ./MPIexecV1 1 0.2  0.001 8
+#
+#
+#./distribute.sh dataX.csv 464810 64 4
+#
+#mpirun -np 4 ./MPIexecV1 1 0.2  0.001 8
+#
+#
+#./distribute.sh dataX.csv 464810 64 8
+#
+#mpirun -np 8 ./MPIexecV1 1 0.2  0.001 8
+#
+#
+./distribute.sh dataX_a9a.csv 32560 40 16
+
+mpirun -np 16 ./MPIexecV1 1 0.8 0.001 0.125
+mpirun -np 16 ./MPIexecV1 1 0.05 0.001 0.125
+mpirun -np 16 ./MPIexecV1 0.5 0.05 0.001 0.125
+mpirun -np 16 ./MPIexecV1 0.5 0.8 0.001 0.125
+mpirun -np 16 ./MPIexecV1 0.5 0.2 0.001 0.125
+mpirun -np 16 ./MPIexecV1 0.25 0.05 0.001 0.125
+
+#
+#
+#./distribute.sh dataX.csv 464810 64 32
+#
+#mpirun -np 32 ./MPIexecV1 1 0.2  0.001 8
+#
+#
+#./distribute.sh dataX.csv 464810 64 64
+#
+#mpirun -np 64 ./MPIexecV1 1 0.2  0.001 8
+#
+#
+#./distribute.sh dataX.csv 464810 64 128
+#
+#mpirun -np 128 ./MPIexecV1 1 0.2  0.001 8
+#
+wait
