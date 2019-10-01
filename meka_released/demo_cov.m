@@ -30,7 +30,7 @@ tmpK = exp(-sqdist(A(rsmpind,:),A)*gamma);
 Err = norm(tmpK-(U(rsmpind',:)*S)*U','fro')/norm(tmpK,'fro')
 fprintf('The relative approximation error is %f\n',Err);
 
-%==========================
+%==========================  Modified by Jyotikrishna Dass for TPDS from here
 
 %S(abs(S)<1e-4)=0;
 %U(abs(U)<1e-4)=0;
